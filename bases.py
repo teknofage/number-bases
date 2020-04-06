@@ -17,10 +17,9 @@ def decode(digits, base):
     return: int -- integer representation of number (in base 10)"""
     # Handle up to base 36 [0-9a-z]
     assert 2 <= base <= 36, 'base is out of range: {}'.format(base)
-    # TODO: Decode digits from binary (base 2)
-    # def binary_to_dec():
+    
     decimal_num = 0
-    digits = digits[::-1] #reveres string
+    digits = digits[::-1] #reverse string
     for i in range(len(digits)):
         digit = digits[i] #individual digit at index i
         digit = int(digit, base)
@@ -29,11 +28,6 @@ def decode(digits, base):
     return decimal_num
     
 print (decode("1011", 2)) # we want 11
-        
-    # TODO: Decode digits from hexadecimal (base 16)
-    # ...
-    # TODO: Decode digits from any base (2 up to 36)
-    # ...
 
 
 def encode(number, base):
@@ -46,12 +40,19 @@ def encode(number, base):
     # Handle unsigned numbers only for now
     assert number >= 0, 'number is negative: {}'.format(number)
     # TODO: Encode number in binary (base 2)
-    # ...
+    base_num = 0
+    # number = number[::-1]
+    for i in range(len(number)):
+        numbers = numbers[i]
+        number = int(number, base)
+        base_num += number * base ** i
+    
+    return str(base_num)
     # TODO: Encode number in hexadecimal (base 16)
     # ...
     # TODO: Encode number in any base (2 up to 36)
     # ...
-
+print (encode(9, 2)) # we want 1001
 
 def convert(digits, base1, base2):
     """Convert given digits in base1 to digits in base2.
