@@ -40,14 +40,36 @@ def encode(number, base):
     # Handle unsigned numbers only for now
     assert number >= 0, 'number is negative: {}'.format(number)
     # TODO: Encode number in binary (base 2)
-    base_num = 0
-    # number = number[::-1]
-    for i in range(len(number)):
-        numbers = numbers[i]
-        number = int(number, base)
-        base_num += number * base ** i
+    # base_num = 0
+    # # number = number[::-1]
+    # for i in range(len(number)):
+    #     numbers = numbers[i]
+    #     number = int(number, base)
+    #     base_num += number * base ** i
+        
+    #     number * base ** i
+        
+    #     8 = 1000(2)
+    #     8//2 = 4 : 0
+    #     4//2 = 2 : 0
+    #     2//2 = 1 : 0
+        
+    #     ans = ""
+    #     ans = rem + ans #adds answer to front of list
+        
+        
+    while digits >= base:
+        quotient = digits // base
+        rem = digits % base
+        ans = str(rem) + ans
+        if digits >= base:
+            digits = quotient
+        else: 
+            ans = str(digits) + ans
+            break
+        
     
-    return str(base_num)
+    return str(ans)
     # TODO: Encode number in hexadecimal (base 16)
     # ...
     # TODO: Encode number in any base (2 up to 36)
