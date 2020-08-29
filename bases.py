@@ -57,9 +57,9 @@ def encode(number, base):
     print(digits_and_letters)
     final_digits = ""
     while number != 0:
-        print("divisor = ", number)
+        # print("divisor = ", number)
         remainder = number % base
-        print("remainder = ", remainder)
+        # print("remainder = ", remainder)
         number = number // base
         final_digits += str(remainder)
     # print(final_digits)
@@ -83,14 +83,12 @@ def convert(digits, base1, base2):
     # TODO: Convert digits from base 10 to base 16 (and vice versa)
     # ...
     # TODO: Convert digits from any base to any base (2 up to 36)
-    # ...
-    #convert base 1 to base 2
-    # we have functions that convert base 1 to base 10
-    # ad base 10 -> base 2
-    base10 = decode(digits, base1)
-    result = encode(base10, base2)
-    return result
+    # base10result = decode(digits, base1)
+    string = decode(digits, base1)
     
+    return encode(int(string), base2)
+    
+print(convert(9, 2, 16)) # we want 1001
 
 
 def main():
