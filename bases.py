@@ -19,15 +19,22 @@ def decode(digits, base):
     assert 2 <= base <= 36, 'base is out of range: {}'.format(base)
     
     decimal_num = 0
-    digits = digits[::-1] #reverse string
+    digits = digits[::-1] #copy the list, slice it, reverse string
     for i in range(len(digits)):
         digit = digits[i] #individual digit at index i
-        digit = int(digit, base)
-        decimal_num += digit * base ** i
-    
+        if digit.isalpha():
+            digit = int(string.ascii_lowercase.index(digits[i].lower()) + 10)
+            # if digit at index is alphabetic: call the lowercase, 
+            # and set decimal_num equal to 10 more than its corresponding 
+            # index function in the ascii_lowercase library method of string
+        else:
+            digit = int(digits[i])
+            # else: set decimal_num to corresponding integer value
+        decimal_num += (digit * base ** i) 
+        #multiply digit by base to the power of the index
     return decimal_num
     
-print (decode("1011", 2)) # we want 11
+print (decode("A56", 16)) # we want 2646
 
 
 def encode(number, base):
@@ -40,8 +47,31 @@ def encode(number, base):
     # Handle unsigned numbers only for now
     assert number >= 0, 'number is negative: {}'.format(number)
     # TODO: Encode number in binary (base 2)
-    # base_num = 0
-    # # number = number[::-1]
+            
+    encoded_number = ""
+    division_result = number
+    while division_result > base:
+        division_result = division_result // base #double division gives integer answers not floats, and removes remainder
+        remainder = division_result % base #gets remainder
+        if base == 16:
+            #convert
+            encoded_number += remainder
+        
+        
+        elif base == 2:
+            pass
+            #convert
+            
+        elif base == 10:
+            pass
+            #convert
+        
+    #very end left with a string of remainders
+    #reverse string
+    #TODO how do we take those string digits and convert them into correct form?
+    
+    
+    # number = number[::-1]
     # for i in range(len(number)):
     #     numbers = numbers[i]
     #     number = int(number, base)
@@ -58,23 +88,23 @@ def encode(number, base):
     #     ans = rem + ans #adds answer to front of list
         
         
-    while digits >= base:
-        quotient = digits // base
-        rem = digits % base
-        ans = str(rem) + ans
-        if digits >= base:
-            digits = quotient
-        else: 
-            ans = str(digits) + ans
-            break
+    # while digits >= base:
+    #     quotient = digits // base
+    #     rem = digits % base
+    #     ans = str(rem) + ans
+    #     if digits >= base:
+    #         digits = quotient
+    #     else: 
+    #         ans = str(digits) + ans
+    #         break
         
     
-    return str(ans)
+    # return str(ans)
     # TODO: Encode number in hexadecimal (base 16)
     # ...
     # TODO: Encode number in any base (2 up to 36)
     # ...
-print (encode(9, 2)) # we want 1001
+print(encode(9, 2)) # we want 1001
 
 def convert(digits, base1, base2):
     """Convert given digits in base1 to digits in base2.
@@ -93,6 +123,13 @@ def convert(digits, base1, base2):
     # ...
     # TODO: Convert digits from any base to any base (2 up to 36)
     # ...
+    #convert base 1 to base 2
+    # we have functions that convert base 1 to base 10
+    # ad base 10 -> base 2
+    base10 = decode(digits, base1)
+    result = encode(base10, base2)
+    return result
+    
 
 
 def main():
